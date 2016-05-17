@@ -6,6 +6,7 @@ import { RouteConfig, Router } from '@angular/router-deprecated';
 
 import { AppState } from './app.service';
 import { Home } from './home';
+import { TodoApp } from './todos/todos.component';
 import { RouterActive } from './router-active';
 
 /*
@@ -66,6 +67,9 @@ import { RouterActive } from './router-active';
           <button md-button router-active [routerLink]=" ['Home'] ">
             Home
           </button>
+          <button md-button router-active [routerLink]=" ['Todo'] ">
+            Todo
+          </button>
           <button md-button router-active [routerLink]=" ['About'] ">
             About
           </button>
@@ -87,6 +91,7 @@ import { RouterActive } from './router-active';
 @RouteConfig([
   { path: '/',      name: 'Index', component: Home, useAsDefault: true },
   { path: '/home',  name: 'Home',  component: Home },
+  { path: '/todo',  name: 'Todo',  component: TodoApp },
   // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
   { path: '/about', name: 'About', loader: () => require('es6-promise!./about')('About') }
 ])
