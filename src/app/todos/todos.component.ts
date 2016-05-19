@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { FilterLink } from './components/filter-link';
 import { TodoList } from './components/todo-list';
-import { TodosViewModel } from './components/todos-viewmodel';
 import { TodosActions } from './actions/todos.actions';
 
 @Component({
@@ -17,21 +16,12 @@ import { TodosActions } from './actions/todos.actions';
       </header>
       <div>
         <p>Show:
-          <filter-link 
-            [currentFilter]="(viewModel.filter$ | async)" 
-            [count]="(viewModel.totalTodos$ | async)" 
-            filter="SHOW_ALL">All</filter-link>,  
-          <filter-link 
-            [currentFilter]="(viewModel.filter$ | async)"
-            [count]="(viewModel.activeTodos$ | async)"
-            filter="SHOW_ACTIVE">Active</filter-link>, 
-          <filter-link 
-            [currentFilter]="(viewModel.filter$ | async)" 
-            [count]="(viewModel.completedTodos$ | async)"
-            filter="SHOW_COMPLETED">Completed</filter-link>
+          <filter-link filter="SHOW_ALL">All</filter-link>,
+          <filter-link filter="SHOW_ACTIVE">Active</filter-link>,
+          <filter-link filter="SHOW_COMPLETED">Completed</filter-link>
         </p>
         <todo-list
-          [todos]="(viewModel.todos$ | async)"
+          [todos]="todosActions.todos$ | async"
           (toggleTodo)="todosActions.toggleTodo($event)"
           (deleteTodo)="todosActions.deleteTodo($event)">
         </todo-list>
@@ -42,13 +32,11 @@ import { TodosActions } from './actions/todos.actions';
   styles: [require('./todo.css')],
   encapsulation: ViewEncapsulation.None,
   directives: [FilterLink, TodoList],
-  providers: [TodosViewModel],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoApp {
 
   constructor(
-    public viewModel : TodosViewModel,
     public todosActions: TodosActions
   ){}
 
