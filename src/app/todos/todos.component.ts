@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { NgPlural } from '@angular/common'
 import { FilterLink } from './components/filter-link';
 import { TodoList } from './components/todo-list';
 import { TodosActions } from './actions/todos.actions';
@@ -14,24 +15,35 @@ import { TodosActions } from './actions/todos.actions';
           <input id="new-todo" placeholder="What needs to be done?" #input>
         </form>
       </header>
-      <div>
-        <p>Show:
-          <filter-link filter="SHOW_ALL">All</filter-link>,
-          <filter-link filter="SHOW_ACTIVE">Active</filter-link>,
-          <filter-link filter="SHOW_COMPLETED">Completed</filter-link>
-        </p>
+      <section id="main">
+        <input class="toggle-all" type="checkbox" id="toggle-all"
+              #toggleAll 
+              [checked]="todosActions.allCompleted()" 
+              (click)="todosActions.toggleAll(toggleAll.checked)">
+        <label for="toggle-all">Mark all as complete</label>
         <todo-list
           [todos]="todosActions.todos$ | async"
           (toggleTodo)="todosActions.toggleTodo($event)"
           (deleteTodo)="todosActions.deleteTodo($event)">
         </todo-list>
-      </div>
+      </section>
+      <footer id="footer">
+        <span id="todo-count">
+          {{ activeCount() }}
+        </span>
+        <ul id="filters">
+          <filter-link filter="SHOW_ALL">All</filter-link>
+          <filter-link filter="SHOW_ACTIVE">Active</filter-link>
+          <filter-link filter="SHOW_COMPLETED">Completed</filter-link>
+        </ul>
+        <button id="clear-completed">Clear completed</button>
+      </footer>
 		</section>
 	</div>
 	`,
   styles: [require('./todo.css')],
   encapsulation: ViewEncapsulation.None,
-  directives: [FilterLink, TodoList],
+  directives: [FilterLink, TodoList, NgPlural],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoApp {
@@ -39,6 +51,13 @@ export class TodoApp {
   constructor(
     public todosActions: TodosActions
   ){}
+
+  activeCount():string{
+    const count = this.todosActions.activeCount();
+    if (count == 0) return '';
+    if (count == 1) return '1 item left';
+    return count + ' items left';
+  }
 
   addTodo(element){
     this.todosActions.addTodo(element.value);

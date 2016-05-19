@@ -158,7 +158,6 @@ button, input[type="checkbox"] {
 #todoapp {
   max-width: 550px;
   position: absolute;
-  left: 30%;
   background: #fff;
   margin: 130px 0 40px 0;
   position: relative;
@@ -332,6 +331,8 @@ label[for='toggle-all'] {
   margin-bottom: -1px; }
 
 #footer {
+  display: block;
+  min-height: 20px;
   color: #777;
   padding: 10px 15px;
   text-align: center;

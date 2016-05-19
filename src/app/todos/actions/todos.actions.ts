@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import {
   SET_VISIBILITY_FILTER, SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED,
-  ADD_TODO, TOGGLE_TODO, DELETE_TODO
+  ADD_TODO, TOGGLE_TODO, TOGGLE_ALL_TODO, DELETE_TODO
 } from '../constants';
 import { Todo } from "../reducers/todos";
 
@@ -29,6 +29,18 @@ export class TodosActions {
 
   deleteTodo(todo : Todo){
     this.store.dispatch({type: DELETE_TODO, payload: todo});
+  }
+
+  allCompleted(): boolean{
+    return this.store.getState().todos.every(t => t.completed);
+  }
+
+  activeCount(): number{
+    return this.store.getState().todos.filter(t => !t.completed).length;
+  }
+
+  toggleAll(completed: boolean) {
+    this.store.dispatch({type: TOGGLE_ALL_TODO, payload: completed});
   }
 
   setVisibilityFilter(filter: string){

@@ -5,15 +5,13 @@ import { TodoItem } from './todo-item';
 @Component({
   selector: 'todo-list',
   template: `
-    <section id="main">
-      <ul id="todo-list">
-          <todo-item *ngFor="let todo of todos"
-              [todo]="todo"
-              (toggleTodo)="toggleTodo.emit($event)"
-              (deleteTodo)="deleteTodo.emit($event)">
-          </todo-item>
-      </ul>
-    </section>
+    <ul id="todo-list">
+        <todo-item *ngFor="let todo of todos"
+            [todo]="todo"
+            (toggleTodo)="toggleTodo.emit($event)"
+            (deleteTodo)="deleteTodo.emit($event)">
+        </todo-item>
+    </ul>
     `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   directives: [TodoItem]

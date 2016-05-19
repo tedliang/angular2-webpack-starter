@@ -4,11 +4,13 @@ import { TodosActions } from '../actions/todos.actions';
 @Component({
   selector: 'filter-link',
   template: `
-    <a href="#"
-      [ngClass]="active() ? 'active' : 'inactive'"
-      (click)="applyFilter()">
-      <ng-content></ng-content>
-    </a>
+    <li>
+      <a href="#"
+        [ngClass]="{'selected': active()}"
+        (click)="applyFilter()">
+        <ng-content></ng-content>
+      </a>
+    </li>
     `
 })
 export class FilterLink {
