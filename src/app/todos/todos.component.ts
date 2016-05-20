@@ -23,6 +23,7 @@ import { TodosActions } from './actions/todos.actions';
         <label for="toggle-all">Mark all as complete</label>
         <todo-list
           [todos]="todosActions.todos$ | async"
+          (updateTodo)="todosActions.updateTodo($event)"
           (toggleTodo)="todosActions.toggleTodo($event)"
           (deleteTodo)="todosActions.deleteTodo($event)">
         </todo-list>
@@ -36,7 +37,7 @@ import { TodosActions } from './actions/todos.actions';
           <filter-link filter="SHOW_ACTIVE">Active</filter-link>
           <filter-link filter="SHOW_COMPLETED">Completed</filter-link>
         </ul>
-        <button id="clear-completed">Clear completed</button>
+        <button id="clear-completed" (click)="todosActions.clearCompleted()">Clear completed</button>
       </footer>
 		</section>
 	</div>

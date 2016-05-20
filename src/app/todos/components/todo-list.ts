@@ -8,6 +8,7 @@ import { TodoItem } from './todo-item';
     <ul id="todo-list">
         <todo-item *ngFor="let todo of todos"
             [todo]="todo"
+            (updateTodo)="updateTodo.emit($event)"
             (toggleTodo)="toggleTodo.emit($event)"
             (deleteTodo)="deleteTodo.emit($event)">
         </todo-item>
@@ -18,6 +19,7 @@ import { TodoItem } from './todo-item';
 })
 export class TodoList{
   @Input() todos : Todo[];
+  @Output() updateTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
   @Output() toggleTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
   @Output() deleteTodo: EventEmitter<Todo> = new EventEmitter<Todo>();
 
