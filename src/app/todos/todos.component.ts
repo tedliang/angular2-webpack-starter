@@ -14,6 +14,10 @@ import { TodosActions } from './actions/todos.actions';
         <form id="todo-form" (ngSubmit)="addTodo(input)" autocomplete="off">
           <input id="new-todo" placeholder="What needs to be done?" #input>
         </form>
+        <ul id="timeTravel">
+          <li><a href="#undo" *ngIf="todosActions.hasUndo()" (click)="todosActions.undo()">Undo</a></li>
+          <li><a href="#redo" *ngIf="todosActions.hasRedo()" (click)="todosActions.redo()">Redo</a></li>
+        </ul>
       </header>
       <section id="main">
         <input class="toggle-all" type="checkbox" id="toggle-all"

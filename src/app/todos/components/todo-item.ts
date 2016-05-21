@@ -9,7 +9,7 @@ import { Todo } from '../reducers/todos';
         <input class="toggle" type="checkbox" 
             (change)="toggleTodo.emit(todo)" 
             [checked]="todo.completed">
-        <label (dblclick)="editTodo()">{{todo.text}}</label>
+        <label (dblclick)="editTodo()" title="Double-click to edit a todo">{{todo.text}}</label>
         <button class="destroy" (click)="deleteTodo.emit(todo)"></button>
       </div>
       <input class="edit" #edited *ngIf="editing" 

@@ -355,6 +355,25 @@ label[for='toggle-all'] {
 #todo-count strong {
   font-weight: 300; }
 
+#timeTravel {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: absolute;
+  right: 2px;
+  top: 16px; }
+
+#timeTravel li {
+  min-height: 19px; }
+
+#timeTravel li a {
+  color: inherit;
+  margin: 3px;
+  padding: 3px 7px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  border-radius: 3px; }
+
 #filters {
   margin: 0;
   padding: 0;

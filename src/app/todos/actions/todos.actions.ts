@@ -3,6 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import {
   SET_VISIBILITY_FILTER, SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED,
+  UNDO, REDO,
   ADD_TODO, UPDATE_TODO,
   TOGGLE_TODO, TOGGLE_ALL_TODO,
   DELETE_TODO, CLEAR_COMPLETED_TODO
@@ -18,7 +19,7 @@ export class TodosActions {
     this.todos$ = store.select(state => ({
       todos: state.todos,
       filter: state.visibilityFilter
-    })).map(vm => this.visibleTodos(vm.todos, vm.filter));
+    })).map(vm => this.visibleTodos(vm.todos.present, vm.filter));
   }
 
   addTodo(text: string){
@@ -38,11 +39,11 @@ export class TodosActions {
   }
 
   allCompleted(): boolean{
-    return this.store.getState().todos.every(t => t.completed);
+    return this.store.getState().todos.present.every(t => t.completed);
   }
 
   activeCount(): number{
-    return this.store.getState().todos.filter(t => !t.completed).length;
+    return this.store.getState().todos.present.filter(t => !t.completed).length;
   }
 
   toggleAll(completed: boolean) {
@@ -51,6 +52,24 @@ export class TodosActions {
 
   clearCompleted() {
     this.store.dispatch({type: CLEAR_COMPLETED_TODO});
+  }
+
+  undo() {
+    this.store.dispatch({type: UNDO});
+    return false;
+  }
+
+  redo() {
+    this.store.dispatch({type: REDO});
+    return false;
+  }
+
+  hasUndo(): boolean {
+    return this.store.getState().todos.past.length > 0;
+  }
+
+  hasRedo(): boolean {
+    return this.store.getState().todos.future.length > 0;
   }
 
   setVisibilityFilter(filter: string){
