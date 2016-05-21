@@ -67,6 +67,7 @@
    },
   "dependencies": {
     "@ngrx/store": "^1.5.0",
+    "ngrx-store-localstorage": "^0.0.7",
     "@angular2-material/button": "2.0.0-alpha.4",
     "@angular2-material/card": "2.0.0-alpha.4",
     "@angular2-material/checkbox": "2.0.0-alpha.4",

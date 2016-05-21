@@ -7,12 +7,12 @@ import { APP_REDUCERS } from './todos/reducers';
 import { APP_ACTIONS } from './todos/actions';
 
 import { provideStore } from '@ngrx/store';
-import { instrumentStore } from '@ngrx/devtools';
+import { localStorageMiddleware } from 'ngrx-store-localstorage';
 
 // Application wide providers
 export const APP_PROVIDERS = [
   APP_ACTIONS,
   provideStore(APP_REDUCERS),
-  instrumentStore(),
+  localStorageMiddleware(['todos', 'visibilityFilter'], true),
   AppState
 ];
