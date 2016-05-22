@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
+
+import { AppState } from '../../app.service';
+import { Todo } from '../reducers/todos';
 import {
   SET_VISIBILITY_FILTER, SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED,
   UNDO, REDO,
@@ -8,18 +11,25 @@ import {
   TOGGLE_TODO, TOGGLE_ALL_TODO,
   DELETE_TODO, CLEAR_COMPLETED_TODO
 } from '../constants';
-import { Todo } from "../reducers/todos";
 
 @Injectable()
 export class TodosActions {
 
   public todos$: Observable<Todo[]>;
 
-  constructor(private store : Store<any>){
-    this.todos$ = store.select(state => ({
-      todos: state.todos,
+  constructor(
+    private store : Store<any>,
+    private appState: AppState
+  ){
+    const subState$ = store.select(state => ({
+      todos: state.todos.present,
       filter: state.visibilityFilter
-    })).map(vm => this.visibleTodos(vm.todos.present, vm.filter));
+    }));
+    this.todos$ = subState$.map(state => this.visibleTodos(state.todos, state.filter));
+    subState$.subscribe(function (state) {
+      appState.set('todos', state.todos);
+      appState.set('filter', state.filter);
+    });
   }
 
   addTodo(text: string){
