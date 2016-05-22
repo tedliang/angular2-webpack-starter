@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { NgPlural } from '@angular/common'
+
 import { FilterLink } from './components/filter-link';
 import { TodoList } from './components/todo-list';
 import { TodosActions } from './actions/todos.actions';

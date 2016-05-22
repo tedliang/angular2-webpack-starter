@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+
 import { Todo } from '../reducers/todos';
 import { TodoItem } from './todo-item';
 
