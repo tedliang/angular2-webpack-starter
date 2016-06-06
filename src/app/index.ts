@@ -6,13 +6,18 @@ import { AppState } from './app.service';
 import { APP_REDUCERS } from './todos/reducers';
 import { APP_ACTIONS } from './todos/actions';
 
-import { provideStore } from '@ngrx/store';
-import { localStorageMiddleware } from 'ngrx-store-localstorage';
+import { provideStore, combineReducers } from '@ngrx/store';
+import { compose } from '@ngrx/core/compose';
+import { localStorageSync } from 'ngrx-store-localstorage';
 
 // Application wide providers
 export const APP_PROVIDERS = [
   APP_ACTIONS,
-  provideStore(APP_REDUCERS),
-  localStorageMiddleware(['todos', 'visibilityFilter'], true),
+  provideStore(
+    compose(
+      localStorageSync(['todos'], true),
+      combineReducers
+    )(APP_REDUCERS)
+  ),
   AppState
 ];

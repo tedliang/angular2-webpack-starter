@@ -49,11 +49,11 @@ export class TodosActions {
   }
 
   allCompleted(): boolean{
-    return this.store.getState().todos.present.every(t => t.completed);
+    return this.getTodos('present').every(t => t.completed);
   }
 
   activeCount(): number{
-    return this.store.getState().todos.present.filter(t => !t.completed).length;
+    return this.getTodos('present').filter(t => !t.completed).length;
   }
 
   toggleAll(completed: boolean) {
@@ -75,19 +75,31 @@ export class TodosActions {
   }
 
   hasUndo(): boolean {
-    return this.store.getState().todos.past.length > 0;
+    return this.getTodos('past').length > 0;
   }
 
   hasRedo(): boolean {
-    return this.store.getState().todos.future.length > 0;
+    return this.getTodos('future').length > 0;
   }
 
-  setVisibilityFilter(filter: string){
+  setVisibilityFilter(filter: string) {
     this.store.dispatch({type: SET_VISIBILITY_FILTER, payload: filter});
   }
 
-  getVisibilityFilter(): string{
-    return this.store.getState().visibilityFilter;
+  getVisibilityFilter(): string {
+    let filter;
+    this.store.subscribe(function (state) {
+      filter = state.visibilityFilter;
+    });
+    return filter;
+  }
+
+  private getTodos(key: string): Todo[] {
+    let todos = [];
+    this.store.subscribe(function (state) {
+      todos = state.todos[key];
+    });
+    return todos;
   }
 
   private visibleTodos(todos : Todo[], filter: string) : Todo[]{

@@ -1,8 +1,8 @@
-import {Reducer, Action} from '@ngrx/store';
+import {ActionReducer, Action} from '@ngrx/store';
 
 export interface UndoableState {
   past: any[],
-  present: Reducer<any>,
+  present: ActionReducer<any>,
   future: any[]
 }
 
@@ -14,7 +14,7 @@ export interface UndoableState {
  Example local-storage: https://github.com/btroncone/ngrx-store-localstorage/tree/storev2
  Example logger: https://github.com/btroncone/ngrx-store-logger/tree/loggerv2
  */
-export function undoable(reducer : Reducer<any>) {
+export function undoable(reducer : ActionReducer<any>) {
   // Call the reducer with empty action to populate the initial state
   const initialState : UndoableState = {
     past: [],

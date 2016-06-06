@@ -1,4 +1,4 @@
-import { Reducer, Action } from '@ngrx/store';
+import { ActionReducer, Action } from '@ngrx/store';
 
 import {
   ADD_TODO, UPDATE_TODO,
@@ -12,7 +12,7 @@ export interface Todo {
   completed: boolean
 }
 
-const todo : Reducer<Todo> = (state : Todo, action: Action) => {
+const todo : ActionReducer<Todo> = (state : Todo, action: Action) => {
   switch(action.type) {
     case ADD_TODO:
       return {
@@ -44,7 +44,7 @@ const todo : Reducer<Todo> = (state : Todo, action: Action) => {
   }
 };
 
-export const todos : Reducer<Todo[]> = (state : Todo[] = [], action: Action) => {
+export const todos : ActionReducer<Todo[]> = (state : Todo[] = [], action: Action) => {
   switch(action.type) {
     case ADD_TODO:
       return [
