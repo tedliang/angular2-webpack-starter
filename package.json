@@ -89,8 +89,8 @@
     "rxjs": "5.0.0-beta.6",
     "zone.js": "~0.6.12",
 
-    "@ngrx/store": "^2.0.0",
-    "ngrx-store-localstorage": "^0.1.2",
+    "@ngrx/store": "^2.0.1",
+    "ngrx-store-localstorage": "^0.1.4",
 
     "http-server": "^0.9.0"
   },
