@@ -2,12 +2,8 @@
  * Angular 2 decorators and services
  */
 import { Component, ViewEncapsulation } from '@angular/core';
-import { RouteConfig, Router } from '@angular/router-deprecated';
 
 import { AppState } from './app.service';
-import { Home } from './home';
-import { TodoApp } from './todos/todos.component';
-import { RouterActive } from './router-active';
 
 /*
  * App Component
@@ -15,52 +11,61 @@ import { RouterActive } from './router-active';
  */
 @Component({
   selector: 'app',
-  pipes: [ ],
-  providers: [ ],
-  directives: [ RouterActive ],
   encapsulation: ViewEncapsulation.None,
-  styles: [
-    require('./app.css')
+  styleUrls: [
+    './app.style.css'
   ],
   template: `
-    <span router-active>
-      <button [routerLink]=" ['Index'] ">
-        Index
-      </button>
-    </span>
-    <span router-active>
-      <button [routerLink]=" ['Home'] ">
-        Home
-      </button>
-    </span>
-    <span router-active>
-      <button [routerLink]=" ['Todo'] ">
-        Todo
-      </button>
-    </span>
-    <span router-active>
-      <button [routerLink]=" ['About'] ">
-        About
-      </button>
-    </span>
+    <nav>
+      <span>
+        <a [routerLink]=" ['./'] ">
+          Index
+        </a>
+      </span>
+      |
+      <span>
+        <a [routerLink]=" ['./home'] ">
+          Home
+        </a>
+      </span>
+      |
+      <span>
+        <a [routerLink]=" ['./detail'] ">
+          Detail
+        </a>
+      </span>
+      |
+      <span>
+        <a [routerLink]=" ['./todo'] ">
+          Todo
+        </a>
+      </span>
+      |
+      <span>
+        <a [routerLink]=" ['./about'] ">
+          About
+        </a>
+      </span>
+    </nav>
 
     <main>
       <router-outlet></router-outlet>
     </main>
 
     <pre class="app-state">this.appState.state = {{ appState.state | json }}</pre>
+
+    <footer>
+      <span>WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a></span>
+      <div>
+        <a [href]="url">
+          <img [src]="angularclassLogo" width="25%">
+        </a>
+      </div>
+    </footer>
   `
 })
-@RouteConfig([
-  { path: '/',      name: 'Index', component: Home, useAsDefault: true },
-  { path: '/home',  name: 'Home',  component: Home },
-  { path: '/todo',  name: 'Todo',  component: TodoApp },
-  // Async load a component using Webpack's require with es6-promise-loader and webpack `require`
-  { path: '/about', name: 'About', loader: () => require('es6-promise!./about')('About') }
-])
 export class App {
   angularclassLogo = 'assets/img/angularclass-avatar.png';
-  loading = false;
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
 
