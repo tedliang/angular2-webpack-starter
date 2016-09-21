@@ -1,9 +1,7 @@
 import {
-  addProviders,
   inject,
-  TestComponentBuilder
+  TestBed
 } from '@angular/core/testing';
-import { TestBed } from '@angular/core/testing/test_bed';
 import { Component } from '@angular/core';
 import {
   BaseRequestOptions,
@@ -29,11 +27,11 @@ describe('Title', () => {
       Title
     ]}));
 
-  it('should have http', inject([ Title ], (title) => {
+  it('should have http', inject([ Title ], (title: Title) => {
     expect(!!title.http).toEqual(true);
   }));
 
-  it('should get data from the server', inject([ Title ], (title) => {
+  it('should get data from the server', inject([ Title ], (title: Title) => {
     spyOn(console, 'log');
     expect(console.log).not.toHaveBeenCalled();
 

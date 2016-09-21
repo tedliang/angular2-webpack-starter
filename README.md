@@ -210,6 +210,11 @@ npm run webdriver:start
 npm run e2e:live
 ```
 
+### build Docker
+```bash
+npm run build:docker
+```
+
 # Configuration
 Configuration files live in `config/` we are currently using webpack, karma, and protractor for different stages of your application
 
@@ -241,6 +246,17 @@ The included `.vscode` automatically connects to the webpack development server 
 
 # Types
 > When you include a module that doesn't include Type Definitions inside of the module you can include external Type Definitions with @types
+
+i.e, to have youtube api support, run this command in terminal: 
+```shell
+npm i @types/youtube @types/gapi @types/gapi.youtube
+``` 
+In some cases where your code editor doesn't support Typescript 2 yet or these types weren't listed in ```tsconfig.json```, add these to **"src/custom-typings.d.ts"** to make peace with the compile check: 
+```es6
+import '@types/gapi.youtube';
+import '@types/gapi';
+import '@types/youtube';
+```
 
 ## Custom Type Definitions
 When including 3rd party modules you also need to include the type definition for the module
@@ -319,6 +335,8 @@ import * as _ from 'lodash';
  * install Python x86 version between 2.5 and 3.0 on windows see issue [#626](https://github.com/AngularClass/angular2-webpack-starter/issues/626)
 * `Error:Error: Parse tsconfig error [{"messageText":"Unknown compiler option 'lib'.","category":1,"code":5023},{"messageText":"Unknown compiler option 'strictNullChecks'.","category":1,"code":5023},{"messageText":"Unknown compiler option 'baseUrl'.","category":1,"code":5023},{"messageText":"Unknown compiler option 'paths'.","category":1,"code":5023},{"messageText":"Unknown compiler option 'types'.","category":1,"code":5023}]`
  * remove `node_modules/typescript` and run `npm install typescript@beta`. This repo now uses ts 2.0 
+* "There are multiple modules with names that only differ in casing"
+ * change `c:\[path to angular2-webpack-starter]` to `C:\[path to angular2-webpack-starter]` see [926#issuecomment-245223547](https://github.com/AngularClass/angular2-webpack-starter/issues/926#issuecomment-245223547)
 
 # Support, Questions, or Feedback
 > Contact us anytime for anything about this repo or Angular 2

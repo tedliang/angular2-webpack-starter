@@ -1,11 +1,6 @@
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Data } from '@angular/router';
 import { Component } from '@angular/core';
-import {
-  addProviders,
-  inject,
-  TestComponentBuilder
-} from '@angular/core/testing';
-import { TestBed } from '@angular/core/testing/test_bed';
+import { inject, TestBed } from '@angular/core/testing';
 
 // Load the implementations that should be tested
 import { About } from './about.component';
@@ -19,7 +14,7 @@ describe('About', () => {
         provide: ActivatedRoute,
         useValue: {
           data: {
-            subscribe: (fn) => fn({
+            subscribe: (fn: (value: Data) => void) => fn({
               yourData: 'yolo'
             })
           }
@@ -29,7 +24,7 @@ describe('About', () => {
     ]
   }));
 
-  it('should log ngOnInit', inject([About], (about) => {
+  it('should log ngOnInit', inject([About], (about: About) => {
     spyOn(console, 'log');
     expect(console.log).not.toHaveBeenCalled();
 
