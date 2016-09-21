@@ -14,12 +14,7 @@ import { ROUTES } from './app.routes';
 import { App } from './app.component';
 import { APP_RESOLVER_PROVIDERS } from './app.resolver';
 import { AppState, InteralStateType } from './app.service';
-import { APP_REDUCERS } from './todos/reducers';
-import { APP_ACTIONS } from './todos/actions';
-
-import { provideStore, combineReducers } from '@ngrx/store';
-import { compose } from '@ngrx/core/compose';
-import { localStorageSync } from 'ngrx-store-localstorage';
+import { TodosModule } from './todos';
 
 import { Home } from './home';
 import { About } from './about';
@@ -29,7 +24,6 @@ import { XLarge } from './home/x-large';
 // Application wide providers
 const APP_PROVIDERS = [
   ...APP_RESOLVER_PROVIDERS,
-  APP_ACTIONS,
   AppState
 ];
 
@@ -53,6 +47,7 @@ type StoreType = {
   ],
   imports: [ // import Angular's modules
     BrowserModule,
+    TodosModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true })

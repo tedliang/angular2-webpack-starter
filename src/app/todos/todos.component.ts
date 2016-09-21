@@ -1,8 +1,5 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
-import { NgPlural } from '@angular/common'
+import {Component, ChangeDetectionStrategy, ViewEncapsulation} from '@angular/core';
 
-import { FilterLink } from './components/filter-link';
-import { TodoList } from './components/todo-list';
 import { TodosActions } from './actions/todos.actions';
 
 @Component({
@@ -49,7 +46,6 @@ import { TodosActions } from './actions/todos.actions';
 	`,
   styles: [require('./todo.css')],
   encapsulation: ViewEncapsulation.None,
-  directives: [FilterLink, TodoList, NgPlural],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoApp {

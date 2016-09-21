@@ -1,7 +1,6 @@
 import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 
 import { Todo } from '../reducers/todos';
-import { TodoItem } from './todo-item';
 
 @Component({
   selector: 'todo-list',
@@ -15,8 +14,7 @@ import { TodoItem } from './todo-item';
         </todo-item>
     </ul>
     `,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  directives: [TodoItem]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoList{
   @Input() todos : Todo[];
