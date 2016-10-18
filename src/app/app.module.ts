@@ -17,6 +17,7 @@ import { AppState, InternalStateType } from './app.service';
 import { HomeComponent } from './home';
 import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
+import { TodosModule } from './todos';
 import { XLarge } from './home/x-large';
 
 // Application wide providers
@@ -45,6 +46,7 @@ type StoreType = {
   ],
   imports: [ // import Angular's modules
     BrowserModule,
+    TodosModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true })
