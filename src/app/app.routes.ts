@@ -13,10 +13,8 @@ export const ROUTES: Routes = [
   { path: 'todo',  component: TodoApp },
   { path: 'about', component: AboutComponent },
   {
-    path: 'detail', loadChildren: () => System.import('./+detail').then((comp: any) => {
-      return comp.default;
-    })
-    ,
+    path: 'detail', loadChildren: () => System.import('./+detail')
+      .then((comp: any) => comp.default),
   },
   { path: '**',    component: NoContentComponent },
 ];
