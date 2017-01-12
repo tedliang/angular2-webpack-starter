@@ -29,6 +29,8 @@ import { AboutComponent } from './about';
 import { NoContentComponent } from './no-content';
 import { XLargeDirective } from './home/x-large';
 
+import { TodosModule } from './todos';
+
 import '../styles/styles.scss';
 import '../styles/headings.css';
 
@@ -58,6 +60,7 @@ type StoreType = {
   ],
   imports: [ // import Angular's modules
     BrowserModule,
+    TodosModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(ROUTES, { useHash: true, preloadingStrategy: PreloadAllModules })
